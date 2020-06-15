@@ -1,0 +1,43 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Sample Site</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+  <style>
+    .text-align {
+      text-align: center;
+      margin-bottom: 30px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div><h2 class="text-align">Student List</h2></div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>DateOfBirth</th>
+          <th>Gender</th>
+          <th>Course</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for studentRecord in results %} 
+            <tr>
+              <td>{{studentRecord.Name}}</td>
+              <td>{{studentRecord.DateOfBirth|date("d/m/Y")}}</td>
+              <td>{{studentRecord.Gender}}</td>
+              <td>{{studentRecord.Course}}</td>
+              <td><a href="/edit/{{studentRecord.StudentId}}/edit">Edit</a></td>
+              <td><a href="/delete/{{studentRecord.StudentId}}/delete" onclick="alert('Are you sure? you want to delete this record.');">Delete</a></td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+    <div><a href="/">Click here to add new student</a></div>
+  </div>
+</body>
+</html>

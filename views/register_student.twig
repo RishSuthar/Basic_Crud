@@ -1,0 +1,111 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sample Site</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+    <style>
+        .required {
+            border: 1px solid red !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container col-sm-12" id="mainform">
+        <div id="signupbox" style=" margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">Add New Student</div>
+                    <div style="float:right; font-size: 85%; position: relative; top:-20px"><a id="signinlink" href="/listOfStudent">Go to student list</a></div>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form" method="post" action="/signup">
+                        <div id="signupalert" style="display:none" class="alert alert-danger">
+                            <p>Error:</p>
+                            <span></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-md-3 control-label">Name</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="name" id="name"
+                                    placeholder="Student Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob" class="col-md-3 control-label">Date of Birth</label>
+                            <div class="col-md-9">
+                                <input type="date" class="form-control" name="dob" id="dob" placeholder="Date of Birth">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mob_no" class="col-md-3 control-label">Gender</label>
+                            <div class="col-md-9">
+                                <input type="text" class="form-control" name="gender" id="gender" placeholder="Student Gender">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="course" class="col-md-3 control-label">Course</label>
+                            <div class="col-md-9">
+                                <select class="form-control" name="course" id="course">
+                                    <option value="">select course</option>
+                                    {% for records in results %}
+                                    <option value='{{records.Course}}'>{{records.Course}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <!-- Button -->
+                            <div class="col-md-offset-3 col-md-9">
+                                <button id="btn-signup" type="submit" class="btn btn-info"
+                                    onclick="return validation();"><i class="icon-hand-right"></i> &nbsp Sign
+                                    Up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    function validation() {
+        if($("#name").val() == "") {
+            $("#name").addClass("required");
+            $("#name").focus();
+            return false;
+        }
+        else if($("#dob").val() == "") {
+            $("#dob").addClass("required");
+            $("#dob").focus();
+            return false;
+        }
+        else if($("#gender").val() == "") {
+            $("#gender").addClass("required");
+            $("#gender").focus();
+            return false;
+        }
+        else if($("#course").val() == "") {
+            $("#course").addClass("required");
+            $("#course").focus();
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    $("input").on('keypress', function() {
+        $("input").removeClass("required");
+    });
+
+    $("select").on("change", function() {
+        $("select").removeClass("required");
+    });
+</script>
